@@ -99,11 +99,17 @@ To augment the data sat, I also flipped images and angles as this would yield tw
 The output from the simulation also gave left- and right-hand side camera angles. I ended up including these images as well, but while adjusting the steering angle by a certain amount of offset. The offset is required because the model assumes the images are from the center camera. As shown below, the right-hand camera would yield an image suggesting the car was too far to the right, so a negative offset was added to the steering angle in this instance; the converse was done for the left-hand camera images.
 
 Left-Hand Side Camera View:
+
 ![alt text][image9]
+
 Right-Hand Side Camera View:
+
 ![alt text][image8]
+
 Center Camera View
+
 ![alt text][image7]
+
 
 After the collection process, I had ~42,000 left, center and right camera images, yielding ~84,000 total images once their flipped versions were also included.  
 
