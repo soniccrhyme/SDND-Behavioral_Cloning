@@ -1,28 +1,18 @@
 ## **README**
 ---
 
-## **Behavioral Cloning using a Driving Simulator and Keras**
+### **Behavioral Cloning using a Driving Simulator and Keras**
 
-### **Victor Roy**
+#### **Victor Roy**
 
 [GitHub Link](https://github.com/soniccrhyme/SDND-Project_3)
 
 ---
 
-**Behavioral Cloning Project**
-
-The goals / steps of this project are the following:
-* Use the simulator to collect data of good driving behavior
-* Build, a convolution neural network in Keras that predicts steering angles from images
-* Train and validate the model with a training and validation set
-* Test that the model successfully drives around track one without leaving the road
-* Summarize the results with a written report
-
-
 [//]: # (Image References)
 
 [image1]: ./examples/placeholder.png "Model Visualization"
-[image2]: ./examples/placeholder.png "Grayscaling"
+[image2]: ./examples/center_driving.png "Center Lane Driving"
 [image3]: ./examples/placeholder_small.png "Recovery Image"
 [image4]: ./examples/placeholder_small.png "Recovery Image"
 [image5]: ./examples/placeholder_small.png "Recovery Image"
@@ -42,78 +32,64 @@ Repository contains the following files:
 
 #### 2. Prerequisites
 
-Python packages: see Udacity's package requirement list [here][https://github.com/udacity/CarND-Term1-Starter-Kit/blob/master/environment.yml]
+Python packages: see Udacity's package requirement list [here](https://github.com/udacity/CarND-Term1-Starter-Kit/blob/master/environment.yml)
 The model.h5 file is compatible with Keras 2.0.4
 The simulator for your respective OS can be found:
 * [Linux](https://d17h27t6h515a5.cloudfront.net/topher/2017/February/58ae46bb_linux-sim/linux-sim.zip)
-* [macOS][https://d17h27t6h515a5.cloudfront.net/topher/2017/February/58ae4594_mac-sim.app/mac-sim.app.zip]
-* [Windows][https://d17h27t6h515a5.cloudfront.net/topher/2017/February/58ae4419_windows-sim/windows-sim.zip]
+* [macOS](https://d17h27t6h515a5.cloudfront.net/topher/2017/February/58ae4594_mac-sim.app/mac-sim.app.zip)
+* [Windows](https://d17h27t6h515a5.cloudfront.net/topher/2017/February/58ae4419_windows-sim/windows-sim.zip)
 
 #### 3. Execution Instructions
 Using the Udacity provided simulator as well as the drive.py and model.h5 provided here, the car can be driven autonomously around the track by executing
 ```sh
 python drive.py model.h5
 ```
-and selecting Autonomous Mode. The current model was designed to work with Track #1 (on the left - the one through the desert).
+then running the simulator and selecting Autonomous Mode. The current model was designed to work with Track #1 (on the left - the one through the desert).
 
 ---
 
 ### Model Architecture and Training Strategy
 
-#### 1. An appropriate model architecture has been employed
-
 My model consists of 5 CNN layers and 4 fully connected NNs. The first 3 CNN layers have increasing filter depths of 24, 32, & 48, using a kernel size of 5x5 and a stride of 2x2. The last two CNNs have filter depths of 64, using a kernel size of 3x3 and a stride of 1x1. All CNN layers include a ReLU activation to allow for nonlinearities.
 
-The four fully-connected NNs have decreasing filter sizes of 100, 50, 10 and, finally, 1 - the last of which outputs the logits yields the steering angle. The first two fully-connected layers feature dropout layers with keep probabilities equal to 0.75.
+The four fully-connected NNs have decreasing filter sizes of 100, 50, 10 and, finally, 1 - the last of which yields the steering angle. The first two fully-connected layers feature dropout layers with keep probabilities equal to 0.75. These dropout layers are included in order to encourage the model to redundantly represent important features, thus reducing its propensity toward overfitting.
 
+Furthermore, the model was trained and validated on different sets of simulator runs (in different directions and tracks) - this diversity of training data is also aimed to reduce overfitting. The model was tested by running it through the simulator and ensuring that the vehicle could stay on the track for multiple laps, during different instantiations of the simulator (as to randomize the car's initial state, etc.)
 
-#### 2. Attempts to reduce overfitting in the model
+The model used an Adam optimizer, precluding the necessity of manually tuning a learning rate. The number of epochs were chosen based on when both training and validation loss ceased to improve. Mean standard error (MSE) was used as the loss function.
 
-The model contains dropout layers in order to reduce overfitting.
+Training data was produced with the goal of keeping the vehicle driving safely within the limits of the road. I used a combination of center lane driving, as well as recovery situations, where the car, located too closely to the curb, would correct back toward the center of the road. I also included more data on sections which featured particularly sharp turns, using different angles of approach and different gradients of lateral acceleration. The idea was to feed enough of a variety of situational data so that the model could more easily generalize.
 
-The model was trained and validated on different data sets to ensure that the model was not overfitting. The model was tested by running it through the simulator and ensuring that the vehicle could stay on the track.
-
-#### 3. Model parameter tuning
-
-The model used an adam optimizer, so the learning rate was not tuned manually.
-
-#### 4. Appropriate training data
-
-Training data was chosen to keep the vehicle driving on the road. I used a combination of center lane driving, recovering from the left and right sides of the road ...
-
-For details about how I created the training data, see the next section.
+---
 
 ### Model Architecture and Training Strategy
 
 #### 1. Solution Design Approach
 
-The overall strategy for deriving a model architecture was to ...
+The overall strategy for deriving a model architecture was to keep it relatively simple, yet complex enough to deal with the various situations the car might face on the simulator's tracks. I used an architecture derived from nVidia's which uses as series of CNN's, fed into a series of fully-connected layers. NVIDIA, afterall, was recently successful of being able to run a self-driving car on camera inputs alone based on a similar architecture ([source](http://images.nvidia.com/content/tegra/automotive/images/2016/solutions/pdf/end-to-end-dl-using-px.pdf)). So this architecture seemed sufficient for this significantly less intensive purpose.
 
-My first step was to use a convolution neural network model similar to the ... I thought this model might be appropriate because ...
+Training data was generated by running the simulator several times, both for whole laps and separately for more the more potentially challenging sections of the track. Data was also generated by simulating recovery situations, where the car, too close to the curb, is steered back toward the road's center.
 
-In order to gauge how well the model was working, I split my image and steering angle data into a training and validation set. I found that my first model had a low mean squared error on the training set but a high mean squared error on the validation set. This implied that the model was overfitting.
+Training was carried out by splitting the data into training and validation sets and ensuring that the model did not overfit by ensuring that validation loss was monotonically decreasing over all epochs. I initially tried the model including dropout layers, but the validation loss remained high; dropout layers were subsequently added and successfully combated overfitting.
 
-To combat the overfitting, I modified the model so that ...
+Once the model was trained, it was saved as an hdf file. The simulator was run in autonomous mode using the model.h5 file. On the first few occassions, the car did not seem to be able to navigate the track successfully, so I went back and tried to add more data, especially data representing situations vehicle seemed to find challenging.
 
-Then I ...
-
-The final step was to run the simulator to see how well the car was driving around track one. There were a few spots where the vehicle fell off the track... to improve the driving behavior in these cases, I ....
-
-At the end of the process, the vehicle is able to drive autonomously around the track without leaving the road.
+At the end of the process, the vehicle is able to drive autonomously around the track without leaving the road, as seen in the included video.
 
 #### 2. Final Model Architecture
 
-The final model architecture (model.py lines 18-24) consisted of a convolution neural network with the following layers and layer sizes ...
+The final model architecture (lns 97-113) consisted of a convolution neural network with the following layers and layer sizes ...
 
 Here is a visualization of the architecture (note: visualizing the architecture is optional according to the project rubric)
 
-![alt text][image1]
 
 #### 3. Creation of the Training Set & Training Process
 
-To capture good driving behavior, I first recorded two laps on track one using center lane driving. Here is an example image of center lane driving:
+Training set generation strategy needed to account for all likely scenarios in which the car might find itself - these include both best, worst and weird case scenarios.
 
-![alt text][image2]
+In the best case scenario, the vehicle would never leave the center of the road. Thus a few laps were completed in the simulator while attempting to keep the car in the center of the road as much as possible.  
+
+![center_lane_driving][image2]
 
 I then recorded the vehicle recovering from the left side and right sides of the road back to center so that the vehicle would learn to .... These images show what a recovery looks like starting from ... :
 
@@ -136,3 +112,9 @@ After the collection process, I had X number of data points. I then preprocessed
 I finally randomly shuffled the data set and put Y% of the data into a validation set.
 
 I used this training data for training the model. The validation set helped determine if the model was over or under fitting. The ideal number of epochs was Z as evidenced by ... I used an adam optimizer so that manually training the learning rate wasn't necessary.
+
+---
+
+### References
+
+Bojarski et al. April 25, 2016. End to End Learning for Self-Driving Cars. http://images.nvidia.com/content/tegra/automotive/images/2016/solutions/pdf/end-to-end-dl-using-px.pdf
