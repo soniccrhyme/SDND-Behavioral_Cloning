@@ -11,7 +11,7 @@
 
 [//]: # (Image References)
 
-[image1]: ./report_images/model_architecture.jpg "Model Visualization"
+[image1]: ./report_images/model_architecture.png "Model Visualization"
 [image2]: ./report_images/center_driving.jpg "Center Lane Driving"
 [image3]: ./report_images/right_recovery.jpg "Right-Hand Side Recovery"
 [image4]: ./report_images/left_recovery.jpg "Left-Hand Side Recovery"
@@ -71,7 +71,7 @@ Furthermore, the model was trained and validated on different sets of simulator 
 
 The model used an Adam optimizer, precluding the necessity of manually tuning a learning rate. The number of epochs were chosen based on when both training and validation loss ceased to improve. Mean standard error (MSE) was used as the loss function.
 
-Here is a visualization of the architecture (note: visualizing the architecture is optional according to the project rubric)
+Here is a visualization of the architecture, from NVIDIA's paper on End to End Learning (referenced below):
 
 ![Model Architecture][image1]
 
@@ -102,14 +102,13 @@ Left-Hand Side Camera View:
 
 ![alt text][image9]
 
-Right-Hand Side Camera View:
-
-![alt text][image8]
-
 Center Camera View
 
 ![alt text][image7]
 
+Right-Hand Side Camera View:
+
+![alt text][image8]
 
 After the collection process, I had ~42,000 left, center and right camera images, yielding ~84,000 total images once their flipped versions were also included.  
 
