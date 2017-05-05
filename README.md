@@ -13,13 +13,13 @@
 
 [image1]: ./report_images/model_architecture.jpg "Model Visualization"
 [image2]: ./report_images/center_driving.jpg "Center Lane Driving"
-[image3]: ./report_images/right_recovery.jpg "Right Recovery Image"
-[image4]: ./report_images/left_recovery.jpg "Left Recovery Image"
-[image5]: ./report_images/og_image.jpg "Original Image"
+[image3]: ./report_images/right_recovery.jpg "Right-Hand Side Recovery"
+[image4]: ./report_images/left_recovery.jpg "Left-Hand Side Recovery"
+[image5]: ./report_images/original_image.jpg "Original Image"
 [image6]: ./report_images/flipped_image.jpg "Flipped Image"
-[image5]: ./report_images/camera_center.jpg "Center Camera View"
-[image6]: ./report_images/camera_right.jpg "Right Camera View"
-[image7]: ./report_images/camera_left.jpg "Left Camera View"
+[image7]: ./report_images/camera_center.jpg "Center Camera View"
+[image8]: ./report_images/camera_right.jpg "Right Camera View"
+[image9]: ./report_images/camera_left.jpg "Left Camera View"
 
 
 ### Files, Prerequisites, Usage
@@ -98,9 +98,14 @@ To augment the data sat, I also flipped images and angles as this would yield tw
 
 The output from the simulation also gave left- and right-hand side camera angles. I ended up including these images as well, but while adjusting the steering angle by a certain amount of offset. The offset is required because the model assumes the images are from the center camera. As shown below, the right-hand camera would yield an image suggesting the car was too far to the right, so a negative offset was added to the steering angle in this instance; the converse was done for the left-hand camera images.
 
+![alt text][image9]
+![alt text][image7]
+![alt text][image8]
+
+
 After the collection process, I had ~42,000 left, center and right camera images, yielding ~84,000 total images once their flipped versions were also included.  
 
-Images were trimmed (erasing anything above the horizon, or anything including the hood of the car) and pixel values normalized. The model was then fed into an architecture inspired by NVIDIA's work, and then trained for 10 epochs. A generator was also implemented so that training the model wouldn't be prohibitively memory intensive. 
+Images were trimmed (erasing anything above the horizon, or anything including the hood of the car) and pixel values normalized. The model was then fed into an architecture inspired by NVIDIA's work, and then trained for 10 epochs. A generator was also implemented so that training the model wouldn't be prohibitively memory intensive.
 
 ---
 
