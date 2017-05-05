@@ -11,13 +11,13 @@
 
 [//]: # (Image References)
 
-[image1]: ./examples/placeholder.png "Model Visualization"
-[image2]: ./examples/center_driving.png "Center Lane Driving"
-[image3]: ./examples/placeholder_small.png "Recovery Image"
-[image4]: ./examples/placeholder_small.png "Recovery Image"
-[image5]: ./examples/placeholder_small.png "Recovery Image"
-[image6]: ./examples/placeholder_small.png "Normal Image"
-[image7]: ./examples/placeholder_small.png "Flipped Image"
+[image1]: ./report_images/model_architecture.jpg "Model Visualization"
+[image2]: ./report_images/center_driving.jpg "Center Lane Driving"
+[image3]: ./report_images/right_recovery.jpg "Right Recovery Image"
+[image4]: ./report_images/left_recovery.jpg "Left Recovery Image"
+[image5]: ./report_images/placeholder_small.jpg "Recovery Image"
+[image6]: ./report_images/placeholder_small.png "Normal Image"
+[image7]: ./report_images/placeholder_small.png "Flipped Image"
 
 ---
 
