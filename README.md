@@ -1,11 +1,10 @@
 ## **README**
----
 
 ### **Behavioral Cloning using a Driving Simulator and Keras**
 
 #### **Victor Roy**
 
-[GitHub Link](https://github.com/soniccrhyme/SDND-Project_3)
+[GitHub Link](https://github.com/soniccrhyme/SDND-Behavioral_Cloning)
 
 ---
 
@@ -27,18 +26,18 @@
 #### 1. Files
 
 Repository contains the following files:
-* model.py containing the script which creates and trains a model
-* drive.py for driving the car in autonomous mode
-* model.h5 containing a pre-trained convolution neural network (CNN)
+- ```model.py``` containing the script which creates and trains a model
+- ```drive.py``` for driving the car in autonomous mode
+- ```model.h5``` containing a pre-trained convolution neural network (CNN)
 
 #### 2. Prerequisites
 
 Python packages: see Udacity's package requirement list [here](https://github.com/udacity/CarND-Term1-Starter-Kit/blob/master/environment.yml)
 The model.h5 file is compatible with Keras 2.0.4
 The simulator for your respective OS can be found:
-* [Linux](https://d17h27t6h515a5.cloudfront.net/topher/2017/February/58ae46bb_linux-sim/linux-sim.zip)
-* [macOS](https://d17h27t6h515a5.cloudfront.net/topher/2017/February/58ae4594_mac-sim.app/mac-sim.app.zip)
-* [Windows](https://d17h27t6h515a5.cloudfront.net/topher/2017/February/58ae4419_windows-sim/windows-sim.zip)
+- [Linux](https://d17h27t6h515a5.cloudfront.net/topher/2017/February/58ae46bb_linux-sim/linux-sim.zip)
+- [macOS](https://d17h27t6h515a5.cloudfront.net/topher/2017/February/58ae4594_mac-sim.app/mac-sim.app.zip)
+- [Windows](https://d17h27t6h515a5.cloudfront.net/topher/2017/February/58ae4419_windows-sim/windows-sim.zip)
 
 #### 3. Execution Instructions
 Using the Udacity provided simulator as well as the drive.py and model.h5 provided here, the car can be driven autonomously around the track by executing
